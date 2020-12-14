@@ -23,5 +23,5 @@ if __name__ == '__main__':
 
 # https://telegram.me
 
-# check bot initialization: https://api.telegram.org/bot<822448732:AAGUNRBnPPHjVhOqySQZk_QzP_VaZhgx9i0>/getme
-# check webhook url: https://api.telegram.org/bot822448732:AAGUNRBnPPHjVhOqySQZk_QzP_VaZhgx9i0/getWebhookInfo
+# check bot initialization: https://api.telegram.org/bot<BOT_TOKEN>/getme # yes, with the <> brackets 
+# check webhook url: https://api.telegram.org/botBOT_TOKEN/getWebhookInfo
