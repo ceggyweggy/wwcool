@@ -14,11 +14,14 @@ intros = 4
 intro_names = ["cadence (or cegg(y) (weggy) or any variation of cadence, really)", "andreaaaaaa", "emma", "adele", "chloe"]
 intro_classes = ["212", "idk but er 212'20 yes", "210", "204", "204"]
 intro_cca = ["robo", "girl guidesssssss wuhu", "robo", "shooting", "robo"]
-intro_id = [861886075 ,1254075693, 1206367870, 1119686699, 712481525]
+intro_id = [861886075, 1254075693, 1206367870, 1119686699, 712481525]
 
-current_id = 975508200
+current_id = 975511962
+admin_id = 861886075
 
 unixtime = int(time.time())
+send_id = 0
+msg_id = 0 
 
 def name_to_id(name):
     if name=="ww cool":
@@ -51,7 +54,7 @@ def name_to_id(name):
         chat_id=-415464047
     else:
         chat_id=0
-    return chat_id #if chat_id=0 then invalid
+    return chat_id
 
 class TelegramBot:
 
@@ -74,6 +77,8 @@ class TelegramBot:
     def parse_webhook_data(self, data):
         global unixtime
         global current_id
+        global send_id 
+        global msg_id 
 
         """
         Parses Telegram JSON request from webhook and sets fields for conditional actions
@@ -81,9 +86,9 @@ class TelegramBot:
             data:str: JSON string of data
         """ 
 
-        # if data['update_id'] < current_id:
-        #     self.incoming_message_text = "Edited message"
-        #     return
+        if data['update_id'] < current_id:
+            self.incoming_message_text = "Edited message"
+            return
 
         current_id = data['update_id']
         # if utils.helpers.effective_message_type(data) == "message":
@@ -96,11 +101,21 @@ class TelegramBot:
             return
 
         self.chat_id = message['chat']['id']
+        msg_id = self.chat_id
 
         self.incoming_message_text = message['text'].lower()
 
         self.first_name = message['from']['first_name']
         # self.last_name = message['from']['last_name']
+
+        if self.chat_id > 0 and (not self.chat_id == admin_id):
+            self.chat_id = admin_id
+            self.outgoing_message_text = "Incoming message from: " + self.first_name + ": " + self.incoming_message_text
+            success = self.send_message()
+            self.chat_id = msg_id 
+            return success 
+
+
         print(self.chat_id, end=", ")
         print(self.first_name, end=", ")
         print(current_id)
@@ -117,6 +132,7 @@ class TelegramBot:
         global intro_names
         global intro_classes
         global intro_id
+        global send_id 
 
         success = None
 
@@ -227,6 +243,33 @@ class TelegramBot:
             self.outgoing_message_text = "Word chain!! Chain words."
             success = self.send_message()
 
+        if self.incoming_message_text.startswith('/id'):
+            if not self.chat_id == 861886075: 
+                self.outgoing_message_text = "Admin only!"
+                success = self.send_message()
+                return success 
+            send_id = name_to_id(self.incoming_message_text[4:])
+            self.outgoing_message_text = "ID set!"
+            success = self.send_message()
+
+        if self.incoming_message_text.startswith('/send'):
+            if not self.chat_id == 861886075:
+                self.outgoing_message_text = "Admin only!"
+                success = self.send_message()
+                return success 
+            if send_id == 0:
+                self.outgoing_message_text = "No ID set!"
+                success = self.send_message()
+                return success 
+            mmessage = self.incoming_message_text[6:]
+            self.outgoing_message_text = mmessage 
+            self.chat_id = send_id
+            success = self.send_message()
+            self.chat_id = 861886075
+            self.outgoing_message_text = "Message sent!"
+            success = self.send_message()
+            return success 
+
         if "hello" in self.incoming_message_text:
             self.outgoing_message_text = "Hello!"
             success = self.send_message()
@@ -239,7 +282,7 @@ class TelegramBot:
             self.outgoing_message_text = "🤮"
             success = self.send_message()
 
-        if " ww " in self.incoming_message_text or "werewolf" in self.incoming_message_text:
+        if (" ww " in self.incoming_message_text or "werewolf" in self.incoming_message_text) and not "ww cool" in self.incoming_message_text:
             self.outgoing_message_text = "🐺"
             success = self.send_message()
 
@@ -279,6 +322,10 @@ class TelegramBot:
         if "arso" in self.incoming_message_text:
             self.outgoing_message_text = "🔥"
             success = self.send_message()
+
+        if " sk " in self.incoming_message_text:
+            self.outgoing_message_text = "🔪"
+            success = self.send_message();
 
         if self.incoming_message_text == "Left member!":
             self.outgoing_message_text = "So long!"
