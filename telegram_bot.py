@@ -21,34 +21,27 @@ current_id = 975508200
 unixtime = int(time.time())
 
 def name_to_id(name):
-    chat_id=0
-    if name=="Min Min" or name=="min min" or name=="mm" or name=="min":
-        chat_id=1214863553
-    elif name=="Testing" or name=="testing":
-        chat_id=-492168190
-    elif name=="WW Cool" or name=="ww cool" or name=="WW cool":
+    if name=="ww cool":
         chat_id=-1001199978565
-    elif name=="Cadence" or name=="cadence" or name=="Cadonk" or name=="cadonk" or name.startswith("cegg"):
+    elif name=="cadence" or name=="cadonk" or name.startswith("cegg"):
         chat_id=861886075
-    elif name.startswith("chloe") or name=="Crowee" or name=="crowee":
+    elif name.startswith("chloe") or name=="crowee":
         chat_id=712481525
-    elif name=="xf" or name=="xuefei" or name=="Xuefei" or name=='xf':
+    elif name=="xf" or name=="xuefei":
         chat_id=771649055
-    elif name=="neha" or name=="Neha" or name.startswith("sk"):
-        chat_id=1200619160
-    elif name.startswith("adele") or name.startswith("Adele") or name.startswith("ADELE"):
+    elif name.startswith("adele"):
         chat_id=1119686699
-    elif name=="yx" or name=="yuxuan" or name=="Yuxuan":
+    elif name=="yx" or name=="yuxuan":
         chat_id=1235169098
-    elif name=="emma" or name=="EMMA" or name=="RMMA" or name=="rmma":
+    elif name=="emma":
         chat_id=1206367870
-    elif name=="Zanna" or name=="Zyles" or name=="zanna" or name=="zyles" or name=="zxnna":
+    elif name=="zanna" or name=="zyles" or name=="zxnna":
         chat_id=1149401183
-    elif name.startswith("Past Curfew") or name.startswith("past curfew"):
+    elif name.startswith("past curfew"):
         chat_id=-434170116
-    elif name=="teapot" or name=="Teapot" or name=="raewyn" or name=="Raewyn":
+    elif name=="teapot" or name=="raewyn":
         chat_id=811427963
-    elif name=="xavii" or name=="Xavii" or name=="Xaviera" or name=="xaviera":
+    elif name=="xavii" or name=="xaviera":
         chat_id=1123398215
     elif name=="hihihi":
         chat_id=-452778702
