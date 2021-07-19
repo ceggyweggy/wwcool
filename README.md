@@ -1,5 +1,5 @@
 # wwcool
-ww cool bot 
+ww cool bot on tele, 80fen bot on disc
 
 config = urls (bot token/webhook server) 
 
